@@ -1,6 +1,8 @@
 #include <list>
 #include <algorithm>
 #include <future>
+#include <iostream>
+
 template<typename T>
 std::list<T> parallel_quick_sort(std::list<T> input)
 {
@@ -23,4 +25,17 @@ std::list<T> parallel_quick_sort(std::list<T> input)
     result.splice(result.end(),new_higher);
     result.splice(result.begin(),new_lower.get());
     return result;
+}
+
+int main()
+{
+    std::list<int> input = {3, 6, 8, 10, 1, 2, 1};
+    std::list<int> sorted_list = parallel_quick_sort(input);
+
+    for (int n : sorted_list) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
 }

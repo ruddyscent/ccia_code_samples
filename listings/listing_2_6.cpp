@@ -1,5 +1,6 @@
 #include <thread>
 #include <utility>
+#include <stdexcept> // Include this header for std::logic_error
 
 class scoped_thread
 {
@@ -39,18 +40,14 @@ struct func
     }
 };
 
-void do_something_in_current_thread()
-{}
-
 void f()
 {
-    int some_local_state;
-    scoped_thread t(std::thread(func(some_local_state)));
-        
-    do_something_in_current_thread();
+    int some_local_state = 0;
+    scoped_thread t{std::thread(func(some_local_state))}; // Use braces to avoid vexing parse
 }
 
 int main()
 {
     f();
+    return 0;
 }

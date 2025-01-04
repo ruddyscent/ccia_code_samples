@@ -1,4 +1,5 @@
 #include <mutex>
+#include <string> // Include this header for std::string
 
 class some_data
 {
@@ -41,4 +42,5 @@ void foo()
 int main()
 {
     foo();
+    return 0;
 }
