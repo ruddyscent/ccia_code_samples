@@ -1,0 +1,13 @@
+services:
+  ccia:
+    build: .
+    # Unlimit the size of core files
+    ulimits:
+      core: -1
+    volumes:
+      - ./:/home
+    working_dir: /home
+    # Interactive shell
+    stdin_open: true
+    tty: true
+    command: ["/bin/bash"]
