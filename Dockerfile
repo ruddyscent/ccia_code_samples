@@ -7,6 +7,7 @@ RUN apt-get update \
         build-essential \
 	neovim \
 	gdb \
+	libtbb-dev \
  && apt-get clean autoclean \
  && apt-get autoremove --yes 
 # && rm -rf /var/lib/{apt,dpkg,cache,log}/
