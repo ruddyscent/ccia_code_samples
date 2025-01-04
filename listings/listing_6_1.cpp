@@ -2,6 +2,7 @@
 #include <stack>
 #include <mutex>
 #include <memory>
+#include <iostream>
 
 struct empty_stack: std::exception
 {
@@ -53,3 +54,17 @@ public:
         return data.empty();
     }
 };
+
+int main()
+{
+    threadsafe_stack<int> ts;
+    ts.push(5);
+    ts.push(10);
+    try {
+        std::shared_ptr<int> p = ts.pop();
+        std::cout << "Popped value: " << *p << std::endl;
+    } catch (const empty_stack& e) {
+        std::cout << e.what() << std::endl;
+    }
+    return 0;
+}

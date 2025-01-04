@@ -1,4 +1,6 @@
 #include <memory>
+#include <iostream>
+#include <thread>
 
 template<typename T>
 class queue
@@ -56,3 +58,40 @@ public:
     }
 };
 
+void producer(queue<int>& q)
+{
+    for (int i = 0; i < 10; ++i)
+    {
+        q.push(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+
+void consumer(queue<int>& q)
+{
+    for (int i = 0; i < 10; ++i)
+    {
+        std::shared_ptr<int> value = q.try_pop();
+        if (value)
+        {
+            std::cout << "Consumed: " << *value << std::endl;
+        }
+        else
+        {
+            std::cout << "Queue is empty" << std::endl;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    }
+}
+
+int main()
+{
+    queue<int> q;
+    std::thread prod(producer, std::ref(q));
+    std::thread cons(consumer, std::ref(q));
+
+    prod.join();
+    cons.join();
+
+    return 0;
+}
