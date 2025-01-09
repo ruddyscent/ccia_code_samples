@@ -8,6 +8,6 @@ void hello()
 
 int main()
 {
-    std::jthread t(hello);
-    // No need to call t.join() explicitly
+    std::thread t(hello);
+    t.join();
 }
