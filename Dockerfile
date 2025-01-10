@@ -8,6 +8,7 @@ RUN apt-get update \
 	neovim \
 	gdb \
 	libtbb-dev \
+	git \
  && apt-get clean autoclean \
  && apt-get autoremove --yes 
 # && rm -rf /var/lib/{apt,dpkg,cache,log}/
